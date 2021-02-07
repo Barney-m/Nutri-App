@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Link, Switch } from "react-router";
 import "semantic-ui-css/semantic.min.css";
+import "./css/styles.css";
 import Navbar from "./components/Navbar";
 
 ReactDOM.render(
