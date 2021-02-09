@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, Link, Switch } from "react-router";
-import "semantic-ui-css/semantic.min.css";
-import "./css/styles.css";
-import Navbar from "./components/Navbar";
+import { RecoilRoot } from "recoil";
+import "./public/css/styles.less";
+import App from "./pages/App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navbar />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
