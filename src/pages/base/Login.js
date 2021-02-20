@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox, Row, Col, Image } from "antd";
+import { Form, Input, Button, Checkbox, Row, Col, Image, Divider } from "antd";
+import {
+  GoogleOutlined,
+  FacebookOutlined,
+  AppleOutlined,
+} from "@ant-design/icons";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import NuTri from "../../public/assets/NuTri.png";
 
@@ -21,12 +27,6 @@ const layout = {
     span: 16,
   },
 };
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 
 const Login = ({ setToken }) => {
   const onFinish = (values) => {
@@ -39,6 +39,22 @@ const Login = ({ setToken }) => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [isEmailActive, setIsEmailActive] = useState(false);
+  const [isPasswordActive, setIsPasswordActive] = useState(false);
+
+  const handleEmailChange = (value) => {
+    setEmail(value);
+
+    if (value !== "") setIsEmailActive(true);
+    else setIsEmailActive(false);
+  };
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+
+    if (value !== "") setIsPasswordActive(true);
+    else setIsPasswordActive(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,12 +71,17 @@ const Login = ({ setToken }) => {
         <Col span={12}></Col>
         <Col span={12} className="max-height right-container">
           <div className="login-form-container">
-            <Image
-              width={400}
-              src={NuTri}
-              className="logo-title"
-              preview={false}
-            />
+            <div className="login-title-container">
+              <Image
+                width={400}
+                src={NuTri}
+                className="logo-title"
+                preview={false}
+              />
+            </div>
+            <Divider orientation="center" style={{ padding: "0 15%" }}>
+              Login
+            </Divider>
             <Form
               {...layout}
               name="login"
@@ -70,44 +91,70 @@ const Login = ({ setToken }) => {
               onSubmit={handleSubmit}
               requiredMark={false}
             >
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  { required: true, message: "Please input your email!" },
-                ]}
-                style={{ width: "80%" }}
-              >
-                <Input type="text" onChange={(e) => setEmail(e.target.value)} />
-              </Form.Item>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  { required: true, message: "Please input your password!" },
-                ]}
-                style={{ width: "80%" }}
-              >
-                <Input
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
+              <div className="float-container">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => handleEmailChange(e.target.value)}
                 />
-              </Form.Item>
+                <label
+                  className={isEmailActive ? "active" : ""}
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+              </div>
+
+              <div className="float-container">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => handlePasswordChange(e.target.value)}
+                />
+                <label
+                  className={isPasswordActive ? "active" : ""}
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+              </div>
 
               <Form.Item
-                {...tailLayout}
-                name="remember"
                 valuePropName="checked"
-                style={{ width: "80%" }}
+                className="remember-register-container"
               >
-                <Checkbox>Remember me</Checkbox>
+                <div className="remember-me-container">
+                  <Checkbox>Remember me</Checkbox>
+                </div>
+                <div className="register-container">
+                  Don’t have an account?&nbsp;&nbsp;
+                  <Router>
+                    <Link to="/">Sign up</Link>
+                  </Router>
+                </div>
               </Form.Item>
 
-              <Form.Item {...tailLayout} style={{ width: "80%" }}>
-                <Button type="primary" htmlType="submit">
-                  Submit
+              <Form.Item className="login-btn-container">
+                <Button type="primary" htmlType="submit" className="login-btn">
+                  Login
                 </Button>
               </Form.Item>
+              <Divider orientation="center" style={{ padding: "0 15%" }}>
+                Other Login Method
+              </Divider>
+              <div className="oAuth-icons">
+                <Router>
+                  <Link to="/">
+                    <GoogleOutlined style={{ color: "#EA4335" }} />
+                  </Link>
+                  <Link to="/">
+                    <FacebookOutlined style={{ color: "#3b5998" }} />
+                  </Link>
+                  <Link to="/">
+                    <AppleOutlined style={{ color: "#a2aaad" }} />
+                  </Link>
+                </Router>
+              </div>
             </Form>
           </div>
         </Col>

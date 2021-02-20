@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.1.1",
-    "@testing-library/jest-dom": "^5.11.4",
+    "@babel/core": "^7.12.17",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-react": "^7.12.13",
+    "@craco/craco": "^5.9.0",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "ahooks": "^2.9.6",
