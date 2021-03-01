@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox, Row, Col, Image, Divider } from "antd";
+import { Form, Button, Checkbox, Row, Col, Image, Divider } from "antd";
 import {
   GoogleOutlined,
   FacebookOutlined,
   AppleOutlined,
 } from "@ant-design/icons";
+import { Desktop } from "../../utils/MediaQuery";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import NuTri from "../../public/assets/NuTri.png";
@@ -68,12 +69,14 @@ const Login = ({ setToken }) => {
   return (
     <div className="max-height login-background">
       <Row type="flex" className="max-height">
-        <Col span={12}></Col>
+        <Desktop>
+          <Col span={12}></Col>
+        </Desktop>
         <Col span={12} className="max-height right-container">
           <div className="login-form-container">
             <div className="login-title-container">
               <Image
-                width={400}
+                width={375}
                 src={NuTri}
                 className="logo-title"
                 preview={false}
